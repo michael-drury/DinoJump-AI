@@ -27,14 +27,16 @@ Click the button below to run the program in Gitpod.
 
 ### Run locally
 
-1. Install necessary libraries:
+1. Clone the repository into a local directory by running `git clone https://github.com/michael-drury/DinoJump-AI`
+
+2. Install necessary libraries by running `pip3 install -r requirements.txt`
 - numpy
 - pygame
 - neat-python
 - graphviz
 - matplotlib
 
-2. Download the repository and run `main.py`
+3. Run the repository by running `python3 main.py`
 
 ## Contributors
 
