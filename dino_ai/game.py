@@ -150,3 +150,10 @@ class Game:
         #     dirt.draw()
         # for obst in self.obstacles:
         #     obst.draw()
+
+
+# TODO: Draw dirt
+    # def draw(self):
+    #     pygame.draw.circle(
+    #         WIN, render.BLACK, (round(self.x), round(self.y)), self.radius
+    #     )

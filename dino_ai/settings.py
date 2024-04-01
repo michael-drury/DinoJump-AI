@@ -15,13 +15,11 @@ FRAMES_PER_IMAGE_ANIMATE = (
 )  
 
 #### Environment ####
-ENV_FLOOR_HEIGHT = 350 # PX? 
+ENV_FLOOR_HEIGHT = 350 # PX? Which coordinate system?
 ENV_NUM_DIRT_PIECES = 20 # PX?
 
 #### Dino Sprites ####
-DINO_START_POSITION_X = 100 # PX?
-DINO_GRAVITY_NORMAL = -600 
-DINO_GRAVITY_DUCKING = -400
+
 # TODO: Don't use velocity/ speed interchangeably 
 DINO_JUMP_VELOCITY = 100
 DINO_INITIAL_SPEED = 8
