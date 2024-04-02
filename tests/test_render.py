@@ -1,6 +1,7 @@
 import unittest
 import dino_ai.render as render
 import pygame
+import os
 import tests.test_common as test_common
 
 # Leaning on Pygame for error catching to reduce size of code base so don't want to mock
@@ -84,7 +85,7 @@ class TestRender(unittest.TestCase):
 
     #### Draw Img ####
     def test_draw_img_success(self):
-        test_img = pygame.image.load(os.path.join("images", "dino_jump.png"))
+        test_img = pygame.image.load(os.path.join("images", "dino_jump_0.png"))
         try:
             self.render.draw_img(test_img, 0, 0)
         except:

@@ -44,7 +44,7 @@ def fitness_function(population, config):
     while len(dinoAliveIndex) > 0:
         
         dinoAI.restrict_game_loop_speed()
-        dinoAI.increment_dino_speed()
+        dinoAI.increment_game_speed()
         dinoAI.update_environment()
 
         if(dinoAI.window_closed):
@@ -54,9 +54,9 @@ def fitness_function(population, config):
             dinoAI.update_dino_position(dinoId)
             genomes[dinoId].fitness += 0.1
 
-            nextObstacle = dinoAI.get_next_obstacleInfo(dinoId)
+            nextObstacle = dinoAI.get_next_osbatcle_info(dinoId)
             dinoElevation = dinoAI.get_dino_elevation()
-            dinoSpeed = dinoAI.get_dino_speed()
+            dinoSpeed = dinoAI.get_game_speed()
 
             inputNerons = [
                 nextObstacle.distance,
