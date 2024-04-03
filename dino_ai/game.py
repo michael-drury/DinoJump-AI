@@ -25,9 +25,12 @@ DIRT_SPREAD = 30
 DINO_JUMP_VELOCITY = 100
 DINO_SPEED_INCREMENT = 0.03
 
+OBSTACLE_DISTANCE_MIN = 300
+OBSTACLE_DISTANCE_MAX = 500
+
 
 class Game:
-    def __init__(self, numDinos, win_width, win_height, frame_rate=60, start_speed=8):
+    def __init__(self, numDinos, win_width, win_height, frame_rate=60, start_speed=100):
 
         if numDinos == 0:
             raise ValueError("Can't init game without dinos")
@@ -78,14 +81,14 @@ class Game:
         while len(self.obstacles) != 3:
 
             if self.obstacles:
-                # TODO: REMOVE MAGIC NUMBERS!
-                x_pos = self.obstacles[-1].x + random.randint(400, 600)
+                x_pos = self.obstacles[-1].x + random.randint(
+                    OBSTACLE_DISTANCE_MIN, OBSTACLE_DISTANCE_MAX
+                )
             else:
                 x_pos = self.render.win_width + 50
 
             rand_num = random.randint(0, 3)
             if rand_num == 3:
-                min_y = self.render.win_height / 5
                 self.obstacles.append(
                     assets.Bird(
                         x_pos,
@@ -201,6 +204,7 @@ class Game:
         return False
 
     def draw_game(self):
+        self.render.set_background_white()
         self.render.display_floor()
         self.render.display_score(self.score)
         for dino in self.dinos:
@@ -215,3 +219,6 @@ class Game:
             self.render.draw_img(
                 obst.get_image(), obst.get_image_pos_x(), obst.get_image_pos_y()
             )
+
+    def get_renderer(self):
+        return self.render
