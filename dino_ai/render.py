@@ -49,10 +49,9 @@ class Render:
 
     def draw_img(self, file, posX, posY):
         self.window.blit(file, (posX, posY))
-        
+
     def draw_circle(self, radius, pos_x, pos_y):
-        # TODO: Look on git and find 
-        return
+        pygame.draw.circle(self.window, BLACK, (pos_x, pos_y), radius)
 
     def update_display(self):
         pygame.display.update()

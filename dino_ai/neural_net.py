@@ -51,7 +51,7 @@ def fitness_function(population, config):
             dinoAI.quit_game()
 
         for dinoId in dinoAliveIndex:
-            dinoAI.update_dino_position(dinoId)
+            dinoAI.update_dino(dinoId)
             genomes[dinoId].fitness += 0.1
 
             nextObstacle = dinoAI.get_next_osbatcle_info(dinoId)

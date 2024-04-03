@@ -366,7 +366,7 @@ class TestBird(unittest.TestCase):
             if bird.get_image_pos_y() != bird_y:
                 return
 
-        self.assertTrue(1, "No variance in bird y position detected")
+        self.assertTrue(0, "No variance in bird y position detected")
 
     def test_animates_on_update(self):
         bird = assets.Bird(
@@ -451,7 +451,7 @@ class TestDirt(unittest.TestCase):
             if dirt.get_image_pos_y() != dirt_y:
                 return
 
-        self.assertTrue(1, "No variance in dirt y position detected")
+        self.assertTrue(0, "No variance in dirt y position detected")
 
     def test_size_randomly_changes(self):
         dirt = assets.Dirt(VALID_START_X, VALID_MIN_Y, VALID_MAX_Y)
@@ -462,7 +462,7 @@ class TestDirt(unittest.TestCase):
             if dirt.get_radius() != dirt_rad:
                 return
 
-        self.assertTrue(1, "No variance in dirt radius detected")
+        self.assertTrue(0, "No variance in dirt radius detected")
 
     def test_dirt_radius_within_bounds(self):
         min_rad = 2

@@ -42,11 +42,11 @@ class Game:
         self.frame_rate = frame_rate
         self.clock = pygame.time.Clock()
         self.dino_speed = start_speed
-        self.floor_dirt = []
+        self.floor_dirt: list[assets.Dirt] = []
         self._generate_dirt()
 
         start_pos_x = win_width / 10
-        self.dinos = [
+        self.dinos: list[assets.Dino] = [
             assets.Dino(start_pos_x, floor_height, frame_rate) for _ in range(numDinos)
         ]
         self.score = 0
@@ -69,10 +69,10 @@ class Game:
     def _obstacle_off_screen(self, obstacle):
         return obstacle.x < -obstacle.img.get_width()
 
-    def _delete_obstacles_not_visible(self, obstacles):
-        for obst in obstacles:
+    def _delete_obstacles_not_visible(self):
+        for obst in self.obstacles:
             if self._obstacle_off_screen(obst):
-                obstacles.remove(obst)
+                self.obstacles.remove(obst)
 
     def _populate_screen_with_obstacles(self):
         while len(self.obstacles) != 3:
@@ -108,11 +108,13 @@ class Game:
 
     def _update_dirt(self):
         for dirt in self.floor_dirt:
-            dirt.move(self.dino_speed)
+            dirt.set_game_speed(self.dino_speed)
+            dirt.update()
 
     def _update_obstacles(self):
         for obst in self.obstacles:
-            obst.move(self.dino_speed)
+            obst.set_game_speed(self.dino_speed)
+            obst.update()
 
     def _obstacle_in_front_of_dino(self, obstacle, dino):
         return obstacle.x + obstacle.img.get_width() > dino.x
@@ -154,7 +156,9 @@ class Game:
 
         next_obstacle = self._get_next_obstacle(dinoId)
 
-        distance = next_obstacle.x - (self.dinos[dinoId].x + self.dinos[dinoId].get_image().get_width())
+        distance = next_obstacle.x - (
+            self.dinos[dinoId].x + self.dinos[dinoId].get_image().get_width()
+        )
         height = next_obstacle.img.get_height()
         width = next_obstacle.img.get_width()
         elevation = self.render.floor_height - (
@@ -173,33 +177,41 @@ class Game:
     def dino_jump(self, dinoIndex):
         self.dinos[dinoIndex].jump()
 
+    # TODO: Does this need to be a function that's tested? Just use self.dinos[].duck()?
     def dino_duck(self, dinoIndex):
         self.dinos[dinoIndex].duck()
 
-    def update_dino_position(self, dinoIndex):
-        self.dinos[dinoIndex].update(self.game_speed)
+    def update_dino(self, dinoIndex):
+        self.dinos[dinoIndex].update()
 
     def dino_object_collision(self, dinoIndex):
         for obstacle in self.obstacles:
-            if mechanics.collision(obstacle, self.dinos[dinoIndex]):
+
+            dino = self.dinos[dinoIndex]
+
+            if mechanics.collision(
+                obstacle.get_image(),
+                obstacle.get_image_pos_x(),
+                obstacle.get_image_pos_y(),
+                dino.get_image(),
+                dino.get_image_pos_x(),
+                dino.get_image_pos_y(),
+            ):
                 return True
         return False
 
     def draw_game(self):
-        render.display_floor()
-        render.display_score(self.score)
-
-        # TODO: Pull out info needed to pass to render?
-        # for dino in self.dinos:
-        #     dino.draw()
-        # for dirt in self.floor_dirt:
-        #     dirt.draw()
-        # for obst in self.obstacles:
-        #     obst.draw()
-
-
-# TODO: Draw dirt
-# def draw(self):
-#     pygame.draw.circle(
-#         WIN, render.BLACK, (round(self.x), round(self.y)), self.radius
-#     )
+        self.render.display_floor()
+        self.render.display_score(self.score)
+        for dino in self.dinos:
+            self.render.draw_img(
+                dino.get_image(), dino.get_image_pos_x(), dino.get_image_pos_y()
+            )
+        for dirt in self.floor_dirt:
+            self.render.draw_circle(
+                dirt.get_radius(), dirt.get_image_pos_x(), dirt.get_image_pos_y()
+            )
+        for obst in self.obstacles:
+            self.render.draw_img(
+                obst.get_image(), obst.get_image_pos_x(), obst.get_image_pos_y()
+            )

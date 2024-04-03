@@ -6,8 +6,9 @@ import tests.test_common as test_common
 VALID_NUM_DINOS = 3
 VALID_WIN_WIDTH = 1200
 VALID_WIN_HEIGHT = 400
-VALID_START_SPEED = 8
+VALID_START_SPEED = 100
 VALID_FRAME_RATE = 60
+
 
 class TestGame(unittest.TestCase):
 
@@ -18,7 +19,7 @@ class TestGame(unittest.TestCase):
             VALID_WIN_WIDTH,
             VALID_WIN_HEIGHT,
             start_speed=VALID_START_SPEED,
-            frame_rate=VALID_FRAME_RATE, 
+            frame_rate=VALID_FRAME_RATE,
         )
 
     #### Init ####
@@ -47,9 +48,7 @@ class TestGame(unittest.TestCase):
 
     def test_init_invalid_fps_arg_type(self):
         with self.assertRaises(TypeError):
-            game.Game(
-                VALID_NUM_DINOS, VALID_WIN_WIDTH, VALID_WIN_HEIGHT, frame_rate=""
-            )
+            game.Game(VALID_NUM_DINOS, VALID_WIN_WIDTH, VALID_WIN_HEIGHT, frame_rate="")
 
     def test_init_no_arg(self):
         with self.assertRaises(TypeError):
@@ -65,15 +64,15 @@ class TestGame(unittest.TestCase):
             self.game.restrict_game_loop_speed()
         except:
             self.fail("Restrict game loop speed raised assertion")
-            
+
     def test_restrict_game_loop_causes_pause(self):
         start_time = time.time()
         self.game.restrict_game_loop_speed()
         end_time = time.time()
-        
+
         duration = end_time - start_time
-        expected_delay = 1/VALID_FRAME_RATE
-        
+        expected_delay = 1 / VALID_FRAME_RATE
+
         self.assertAlmostEqual(duration, expected_delay, delta=0.05)
 
     # #### Increment Dino Speed ####
@@ -85,7 +84,11 @@ class TestGame(unittest.TestCase):
 
         self.assertGreater(self.game.get_game_speed(), VALID_START_SPEED)
 
-    # #### Window Closed ####
+    def test_increment_game_speed_faster_incomming_objet(self):
+        # TODO: update game speed, then update & check that object traveled further
+        return
+
+    #### Window Closed ####
     def test_window_close_open_success(self):
         try:
             self.game.window_closed()
@@ -94,21 +97,19 @@ class TestGame(unittest.TestCase):
 
     def test_window_close_detect_open(self):
         self.assertFalse(self.game.window_closed())
-        
-    # TODO: Simulate window open
 
-    # #### Quit Game ####
+    #### Quit Game ####
     def test_quit_game(self):
         try:
             self.game.quit_game()
         except:
             self.fail("Quit game raised assertion")
 
-    # #### Get Dino Elevation ####
+    #### Get Dino Elevation ####
     def test_get_dino_elevation_invalid_type(self):
         with self.assertRaises(TypeError):
             self.game.get_dino_elevation("")
-    
+
     def test_get_dino_elevation_success(self):
         try:
             self.game.get_dino_elevation(0)
@@ -117,50 +118,139 @@ class TestGame(unittest.TestCase):
 
     def test_get_dino_elevation_returns_correct_value(self):
         self.assertEqual(self.game.get_dino_elevation(0), 0)
-        
+
     def test_get_dino_elevation_dino_out_of_range(self):
         with self.assertRaises(IndexError):
             self.game.get_dino_elevation(VALID_NUM_DINOS + 1)
-        
+
     #### Get Dino Speed ####
     def test_get_dino_speed_success(self):
         try:
             self.game.get_game_speed()
         except:
             self.fail("Get dino speed raised assertion")
-    
+
     #### Increment Score ####
     def test_get_dino_speed_success(self):
         try:
             self.game.increment_score()
         except:
             self.fail("Increment score raised assertion")
-    
+
     #### Get Next Obstacle Info ####
     def test_get_next_obstacle_success(self):
         try:
             self.game.get_next_obstacle_info(0)
         except:
-            self.fail("Increment score raised assertion") 
-            
+            self.fail("Increment score raised assertion")
+
     def test_get_next_osbstacle_wrong_type_arg(self):
         with self.assertRaises(TypeError):
             self.game.get_next_obstacle_info("")
-        
+
     # TODO: Check obstacle output params
 
-    #### Update Environment ####
-    
-    #### Dino Jump ####
-    
-    #### Dino Duck ####
-    
-    #### Update Dino Position ####
-    
-    #### Dino Object Collision ####
-    
-    #### Draw Game ####
+    # TODO: Check next obstacle changes
 
+    #### Update Environment ####
+    def test_update_environment_success(self):
+        try:
+            self.game.update_environment()
+        except:
+            self.fail("Update environment raised assertion")
+
+    def test_update_environment_moves_obstacles(self):
+
+        distance_start = self.game.get_next_obstacle_info(0).distance
+        self.game.update_environment()
+        distance_end = self.game.get_next_obstacle_info(0).distance
+
+        self.assertLess(distance_end, distance_start)
+
+    def test_update_environment_new_obstacles_generated(self):
+        # TODO: Check that 10 different obstacles are come into contact with
+        return
+
+    #### Update Dino ####
+    def test_dino_update_success(self):
+        return
+
+    #### Dino Jump ####
+    def test_dino_jump_success(self):
+        try:
+            self.game.dino_jump(0)
+        except:
+            self.fail("Dino jump raised an assertion")
+
+    def test_dino_jump_invalid_index(self):
+        with self.assertRaises(IndexError):
+            self.game.dino_jump(VALID_NUM_DINOS)
+
+    def test_dino_jump_invalid_type(self):
+        with self.assertRaises(TypeError):
+            self.game.dino_jump("")
+
+    def test_dino_jump_results_in_increased_dino_elevation(self):
+        DINO_ID = 0
+        self.game.dino_jump(DINO_ID)
+        self.game.update_dino(DINO_ID)
+        self.assertGreater(self.game.get_dino_elevation(DINO_ID), 0)
+
+    def test_dino_jump_no_jump_from_other_dinos(self):
+        DINO_ID = 0
+        self.game.dino_jump(DINO_ID)
+        self.game.update_dino(DINO_ID)
+        self.assertEqual(self.game.get_dino_elevation(DINO_ID + 1), 0)
+
+    #### Dino Duck ####
+    def test_dino_duck_success(self):
+        try:
+            self.game.dino_duck(0)
+        except:
+            self.fail("Dino duck raised an assertion")
+
+    def test_dino_duck_invalid_index(self):
+        with self.assertRaises(IndexError):
+            self.game.dino_duck(VALID_NUM_DINOS)
+
+    def test_dino_duck_invalid_type(self):
+        with self.assertRaises(TypeError):
+            self.game.dino_duck("")
+
+    #### Dino Object Collision ####
+    def test_dino_collision_success(self):
+        try:
+            self.game.dino_object_collision(0)
+        except:
+            self.fail("Collision detection raised an assertion")
+
+    def test_dino_object_collision_invalid_type(self):
+        with self.assertRaises(TypeError):
+            self.game.dino_object_collision("")
+
+    def test_dino_object_collision_invalid_index(self):
+        with self.assertRaises(IndexError):
+            self.game.dino_object_collision(VALID_NUM_DINOS)
+
+    def test_dino_collision_no_collision_on_init(self):
+        self.assertFalse(self.game.dino_object_collision(0))
+
+    def test_dino_collision_detected_on_game_update(self):
+        ITERATIONS = 10000
+        DINO_ID = 0
+        for _ in range(0, ITERATIONS):
+            self.game.update_environment()
+            if self.game.dino_object_collision(DINO_ID):
+                return
+
+        self.assertTrue(0, "No collision within " + str(ITERATIONS) + " iterations")
+
+    #### Draw Game ####
+    def test_draw_game_success(self):
+        try:
+            self.game.draw_game()
+        except:
+            self.fail("Draw game raised assertion")
 
     def tearDown(self):
         self.game.quit_game()
