@@ -2,6 +2,7 @@ import random
 import pygame
 import os
 
+PIX_PER_METER = 15
 
 DEFAULT_JUMP_SPEED_MPS = 30 
 DEFAULT_FPS = 60
@@ -95,17 +96,19 @@ class Dino:
         time_since_last_frame = self.frames_since_jump_start / self.fps
 
         # NOTE: Use newtonian motion equation to determine dino height (s = ut + 0.5 * a * t^2)
-        jump_elevation = (
+        jump_elevation_meters = (
             self.jump_velocity * time_since_last_frame
             + 0.5 * gravity * time_since_last_frame**2
         )
+        
+        jump_elevation_px = jump_elevation_meters * PIX_PER_METER
 
-        if jump_elevation <= 0:
+        if jump_elevation_px <= 0:
             self.y = self._get_cur_img_floor_y()
             self.frames_since_jump_start = 0
             return
 
-        self.y = self._get_cur_img_floor_y() - jump_elevation
+        self.y = self._get_cur_img_floor_y() - jump_elevation_px
 
     def _update_cur_image(self):
         if self.jump_triggered or self._is_jumping():
@@ -171,10 +174,10 @@ class _SceneElement:
         self.y = None
         self.img = None
         self.fps = fps
-        self.game_speed = game_speed
+        self.game_speed = game_speed * PIX_PER_METER
 
     def set_game_speed(self, speed):
-        self.game_speed = speed
+        self.game_speed = speed * PIX_PER_METER
 
     def _update(self):
         self.x -= round((1 / self.fps) * self.game_speed)
