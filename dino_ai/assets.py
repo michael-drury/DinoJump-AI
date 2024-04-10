@@ -78,6 +78,7 @@ class Dino:
         self.gravity_normal = gravity_normal
         self.gravity_ducking = gravity_ducking
         self.jump_velocity = jump_initial_velocity
+        self.dead = False
 
     def _get_cur_img_floor_y(self):
         return self.floor_pos_y - self.imgs_cur[self.img_index].get_height()
@@ -150,6 +151,12 @@ class Dino:
 
     def get_elevation(self):
         return self._get_cur_img_floor_y() - self.y
+    
+    def set_dead(self):
+        self.dead = True
+        
+    def is_dead(self):
+        return self.dead
 
 
 # TODO: Game speed param used here but frame rate used elsewhere

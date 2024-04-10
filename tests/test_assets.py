@@ -145,6 +145,14 @@ class TestDino(unittest.TestCase):
         self.dino.update()
         self.assertTrue(self.dino.get_elevation() > 0)
 
+    #### Is Dead/ Set dead ####
+    def test_is_dead_true_if_set_dead(self):
+        self.dino.set_dead()
+        self.assertTrue(self.dino.is_dead())
+        
+    def test_is_dead_false_on_init(self):
+        self.assertFalse(self.dino.is_dead())
+
     #### Duck ####
     def test_duck_success(self):
         try:
