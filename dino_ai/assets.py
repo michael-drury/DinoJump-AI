@@ -2,8 +2,8 @@ import random
 import pygame
 import os
 
-DEFAULT_JUMP_SPEED = 15
-DEFAULT_GAME_SPEED = 15
+
+DEFAULT_JUMP_SPEED_MPS = 30 
 DEFAULT_FPS = 60
 DEFAULT_FRAMES_PER_IMAGE = 6
 
@@ -56,8 +56,8 @@ class Dino:
         floor_pos_y,
         fps=DEFAULT_FPS,
         frames_per_img_animate=DEFAULT_FRAMES_PER_IMAGE,
-        gravity_normal=-10,
-        gravity_ducking=-15,
+        gravity_normal=-50 ,
+        gravity_ducking=-70,
         jump_initial_velocity=DEFAULT_JUMP_SPEED,
     ):
         self.imgs_jump = load_images("dino_jump", 1)
