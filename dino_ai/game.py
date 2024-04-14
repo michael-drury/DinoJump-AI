@@ -19,8 +19,6 @@ DIRT_SPREAD = 30
 DINO_JUMP_VELOCITY = 100
 DINO_SPEED_INCREMENT = 0.03
 
-OBSTACLE_DISTANCE_MIN = 300
-OBSTACLE_DISTANCE_MAX = 500
 
 
 class Game:
@@ -76,7 +74,7 @@ class Game:
 
             if self.obstacles:
                 x_pos = self.obstacles[-1].x + random.randint(
-                    OBSTACLE_DISTANCE_MIN, OBSTACLE_DISTANCE_MAX
+                    int(self.render.win_width / 3), int(self.render.win_width / 2)
                 )
             else:
                 x_pos = self.render.win_width + 50
