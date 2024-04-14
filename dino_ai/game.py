@@ -42,7 +42,13 @@ class Game:
 
         start_pos_x = win_width / 10
         self.dinos: list[assets.Dino] = [
-            assets.Dino(start_pos_x, floor_height, frame_rate) for _ in range(numDinos)
+            assets.Dino(
+                start_pos_x,
+                floor_height,
+                frame_rate,
+                jump_initial_velocity=DINO_JUMP_VELOCITY,
+            )
+            for _ in range(numDinos)
         ]
         self.score = 0
         self.obstacles = []
