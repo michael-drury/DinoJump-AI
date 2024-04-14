@@ -8,11 +8,9 @@ FPS = 60
 FRAMES_PER_IMAGE_ANIMATE = 10
 GRAVITY_NORMAL = -10
 GRAVITY_DUCKING = -15
-JUMP_INITIAL_VELOCITY = 15
+JUMP_INITIAL_VELOCITY = 40
 
-# TODO: Can have these here as defaults to use that are valid. Refactor?
-# TODO: Use same strat for dino
-VALID_START_X = 0
+VALID_START_X = 50
 VALID_MIN_Y = 0
 VALID_MAX_Y = 100
 VALID_MIN_RAD = 1
