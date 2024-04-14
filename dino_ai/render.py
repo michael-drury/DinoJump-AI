@@ -3,6 +3,8 @@ import pygame
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
+FLOOR_OFFSET = 20
+
 
 class Render:
     def __init__(self, game_title, window_width, window_height, floor_height):
@@ -39,9 +41,8 @@ class Render:
         self.window.blit(text_surface, (10, 10))
 
     def display_floor(self):
-        # TODO: Magic number! Why is this -20? Can it be a fraction instead?
         pygame.draw.rect(
-            self.window, BLACK, (0, self.floor_height - 20, self.win_width, 2)
+            self.window, BLACK, (0, self.floor_height - FLOOR_OFFSET, self.win_width, 2)
         )
 
     def set_background_white(self):
