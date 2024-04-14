@@ -75,7 +75,7 @@ class TestGame(unittest.TestCase):
 
         self.assertAlmostEqual(duration, expected_delay, delta=0.05)
 
-    # #### Increment Dino Speed ####
+    #### Increment Dino Speed ####
     def test_increment_game_speed(self):
         try:
             self.game.increment_game_speed()
@@ -85,8 +85,17 @@ class TestGame(unittest.TestCase):
         self.assertGreater(self.game.get_game_speed(), VALID_START_SPEED)
 
     def test_increment_game_speed_faster_incomming_objet(self):
-        # TODO: update game speed, then update & check that object traveled further
-        return
+        obj_dist_1 = self.game.get_next_obstacle_info(0).distance
+        self.game.update_environment()
+        obj_dist_2 = self.game.get_next_obstacle_info(0).distance
+        for _ in range(100):
+            self.game.increment_game_speed()
+        self.game.update_environment()
+        obj_dist_3 = self.game.get_next_obstacle_info(0).distance
+
+        dist_trav_1 = obj_dist_1 - obj_dist_2
+        dist_trav_2 = obj_dist_2 - obj_dist_3
+        self.assertGreater(dist_trav_2, dist_trav_1)
 
     #### Window Closed ####
     def test_window_close_open_success(self):
