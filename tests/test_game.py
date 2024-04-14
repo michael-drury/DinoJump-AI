@@ -211,8 +211,24 @@ class TestGame(unittest.TestCase):
         self.assertLess(distance_end, distance_start)
 
     def test_update_environment_new_obstacles_generated(self):
-        # TODO: Check that 10 different obstacles are come into contact with
-        return
+
+        game_instance = game.Game(
+            VALID_NUM_DINOS, VALID_WIN_WIDTH, VALID_WIN_HEIGHT, start_speed=50
+        )
+        num_obstacles = 0
+        prev_dist = VALID_WIN_WIDTH * 2
+        for _ in range(1000):
+            game_instance.update_environment()
+            cur_dist = game_instance.get_next_obstacle_info(0).distance
+            if cur_dist > prev_dist:
+                num_obstacles += 1
+                prev_dist = VALID_WIN_WIDTH * 2
+
+            prev_dist = cur_dist
+            if num_obstacles >= 10:
+                return
+
+        self.assertTrue(0, "Less than 10 obstacles seen in 1000 high-speed iterations")
 
     #### Update Dino ####
     def test_dino_update_success(self):
