@@ -188,7 +188,8 @@ class _SceneElement:
         self.game_speed = speed * PIX_PER_METER
 
     def _update(self):
-        self.x -= round((1 / self.fps) * self.game_speed)
+        distance = round(self.game_speed / self.fps)
+        self.x -= distance
 
     def get_image(self):
         return self.img
