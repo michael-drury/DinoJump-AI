@@ -4,7 +4,8 @@ import os
 
 PIX_PER_METER = 15
 
-DEFAULT_JUMP_SPEED_MPS = 30 
+DEFAULT_JUMP_SPEED_MPS = 40
+DEFAULT_GAME_SPEED_MPS = 15
 DEFAULT_FPS = 60
 DEFAULT_FRAMES_PER_IMAGE = 6
 
@@ -59,7 +60,7 @@ class Dino:
         frames_per_img_animate=DEFAULT_FRAMES_PER_IMAGE,
         gravity_normal=-50 ,
         gravity_ducking=-70,
-        jump_initial_velocity=DEFAULT_JUMP_SPEED,
+        jump_initial_velocity=DEFAULT_JUMP_SPEED_MPS,
     ):
         self.imgs_jump = load_images("dino_jump", 1)
         self.imgs_run = load_images("dino_run", 2)
@@ -205,14 +206,14 @@ class Cactus(_SceneElement):
         start_x,
         floor_y_pos,
         fps=DEFAULT_FRAMES_PER_IMAGE,
-        game_speed=DEFAULT_GAME_SPEED,
+        game_speed=DEFAULT_GAME_SPEED_MPS,
         cactus_size=0,
     ):
         super().__init__(fps, start_x, game_speed)
-        
+
         if cactus_size >= 3:
             raise ValueError("Cactus size should be either 0, 1 or 2")
-        
+
         self.img = load_images("cactus", 3)[cactus_size]
         self.y = floor_y_pos - self.img.get_height()
 
@@ -227,7 +228,7 @@ class Bird(_SceneElement):
         start_x,
         min_y,
         max_y,
-        game_speed=DEFAULT_GAME_SPEED,
+        game_speed=DEFAULT_GAME_SPEED_MPS,
         fps=DEFAULT_FPS,
         frames_per_img_animate=DEFAULT_FRAMES_PER_IMAGE,
     ):
@@ -270,7 +271,7 @@ class Dirt(_SceneElement):
         max_y,
         min_rad=1,
         max_rad=4,
-        game_speed=DEFAULT_GAME_SPEED,
+        game_speed=DEFAULT_GAME_SPEED_MPS,
         fps=DEFAULT_FPS,
     ):
         if min_y >= max_y:
