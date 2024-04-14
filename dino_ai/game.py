@@ -134,7 +134,7 @@ class Game:
         self.clock.tick(self.frame_rate)
 
     def increment_game_speed(self):
-        self.dino_speed += DINO_SPEED_INCREMENT / self.frame_rate
+        self.dino_speed += DINO_SPEED_INCREMENT
 
     def window_closed(self):
         for event in pygame.event.get():
