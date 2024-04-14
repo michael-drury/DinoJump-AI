@@ -351,21 +351,23 @@ class TestBird(unittest.TestCase):
         )
 
     def test_get_image_pos_y_within_bounds(self):
-        min_y = 50
-        max_y = 97
+        MIN_Y = 50
+        MAX_Y = 250
         for bird in range(0, 100):
-            bird = assets.Bird(VALID_START_X, min_y, max_y)
-            self.assertGreaterEqual(max_y, bird.get_image_pos_y())
-            self.assertLessEqual(min_y, bird.get_image_pos_y())
+            bird = assets.Bird(VALID_START_X, MIN_Y, MAX_Y)
+            self.assertGreaterEqual(
+                MAX_Y, bird.get_image_pos_y() + bird.get_image().get_height()
+            )
+            self.assertLessEqual(MIN_Y, bird.get_image_pos_y())
 
     def test_image_position_randomly_changes_within_range(self):
-        min_y = 50
-        max_y = 97
-        bird = assets.Bird(VALID_START_X, min_y, max_y)
+        MIN_Y = 50
+        MAX_Y = 250
+        bird = assets.Bird(VALID_START_X, MIN_Y, MAX_Y)
         bird_y = bird.get_image_pos_y()
 
         for bird in range(0, 100):
-            bird = assets.Bird(0, min_y, max_y)
+            bird = assets.Bird(0, MIN_Y, MAX_Y)
             if bird.get_image_pos_y() != bird_y:
                 return
 
