@@ -182,7 +182,7 @@ class _SceneElement:
         self.y = None
         self.img = None
         self.fps = fps
-        self.game_speed = game_speed * PIX_PER_METER
+        self.set_game_speed(game_speed)
 
     def set_game_speed(self, speed):
         self.game_speed = speed * PIX_PER_METER
