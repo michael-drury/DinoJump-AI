@@ -111,6 +111,8 @@ class Game:
         for dirt in self.floor_dirt:
             dirt.set_game_speed(self.dino_speed)
             dirt.update()
+            if dirt.get_image_pos_x() < 0:
+                dirt.set_x(self.render.win_width + 10)
 
     def _update_obstacles(self):
         for obst in self.obstacles:

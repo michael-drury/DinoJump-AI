@@ -290,6 +290,9 @@ class Dirt(_SceneElement):
         )
         self.radius = random.randint(min_rad, max_rad)
 
+    def set_x(self, x):
+        self.x = x
+
     def get_radius(self):
         return self.radius
 
