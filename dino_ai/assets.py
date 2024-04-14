@@ -175,8 +175,8 @@ class _SceneElement:
         if not isinstance(start_x, int):
             raise TypeError("Expected start_x to be an int")
 
-        if not isinstance(game_speed, int):
-            raise TypeError("Expected game_speed to be an int")
+        if not isinstance(game_speed, float) and not isinstance(game_speed, int):
+            raise TypeError("Expected game_speed to be am int/ float")
 
         self.x = start_x
         self.y = None

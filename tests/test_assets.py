@@ -432,7 +432,7 @@ class TestDirt(unittest.TestCase):
 
     def test_object_create_success(self):
         self.assertIsInstance(
-            assets.Dirt(VALID_START_X, VALID_MIN_Y, VALID_MAX_Y),
+            assets.Dirt(VALID_START_X, VALID_MIN_Y, VALID_MAX_Y, game_speed=1.1),
             assets.Dirt,
             "Failed to initialise dirt instance",
         )
