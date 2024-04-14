@@ -58,7 +58,7 @@ class Dino:
         floor_pos_y,
         fps=DEFAULT_FPS,
         frames_per_img_animate=DEFAULT_FRAMES_PER_IMAGE,
-        gravity_normal=-50 ,
+        gravity_normal=-50,
         gravity_ducking=-70,
         jump_initial_velocity=DEFAULT_JUMP_SPEED_MPS,
     ):
@@ -102,7 +102,7 @@ class Dino:
             self.jump_velocity * time_since_last_frame
             + 0.5 * gravity * time_since_last_frame**2
         )
-        
+
         jump_elevation_px = jump_elevation_meters * PIX_PER_METER
 
         if jump_elevation_px <= 0:
@@ -152,10 +152,10 @@ class Dino:
 
     def get_elevation(self):
         return self._get_cur_img_floor_y() - self.y
-    
+
     def set_dead(self):
         self.dead = True
-        
+
     def is_dead(self):
         return self.dead
 

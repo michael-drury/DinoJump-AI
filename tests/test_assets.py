@@ -146,7 +146,7 @@ class TestDino(unittest.TestCase):
     def test_is_dead_true_if_set_dead(self):
         self.dino.set_dead()
         self.assertTrue(self.dino.is_dead())
-        
+
     def test_is_dead_false_on_init(self):
         self.assertFalse(self.dino.is_dead())
 
