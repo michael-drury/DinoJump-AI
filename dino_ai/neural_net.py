@@ -52,9 +52,8 @@ def fitness_function(population, config):
         dinoAI.increment_game_speed()
         dinoAI.update_environment()
 
-        # if dinoAI.window_closed:
-        #     print("### Window closed ###")
-        #     dinoAI.quit_game()
+        if dinoAI.window_closed():
+            dinoAI.quit_game()
 
         for dinoId in dinoAliveIndex:
             dinoAI.update_dino(dinoId)
