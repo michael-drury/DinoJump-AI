@@ -20,11 +20,8 @@ VALID_MAX_RAD = 4
 VALID_FLOOR_Y = 10
 
 
-# TODO: Need to consider that a pixel is effectively counting as a meter here?
-# Have some kind of scaling tool?
 class TestDino(unittest.TestCase):
 
-    # TODO: Remove setup and move to individual test cases so it's clear what arguments are adjusted for that specific test case
     def setUp(self):
         self.dino = assets.Dino(
             POS_X_START,

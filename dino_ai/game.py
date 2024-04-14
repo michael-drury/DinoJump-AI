@@ -13,12 +13,6 @@ Obstacle = namedtuple(
     "Obstacle", ["height", "width", "distance", "elevation", "is_cactus"]
 )
 
-# Can mock pygame as render is handling it!
-
-# TODO: Oranise methods. Set _ for private methods
-# TODO: Abstract out pygame from Game so same level of access
-
-
 NUM_DIRT_PIECES = 20
 DIRT_SPREAD = 30
 
@@ -180,7 +174,6 @@ class Game:
     def dino_jump(self, dinoIndex):
         self.dinos[dinoIndex].jump()
 
-    # TODO: Does this need to be a function that's tested? Just use self.dinos[].duck()?
     def dino_duck(self, dinoIndex):
         self.dinos[dinoIndex].duck()
 

@@ -4,7 +4,6 @@ import pygame
 import os
 import tests.test_common as test_common
 
-# Leaning on Pygame for error catching to reduce size of code base so don't want to mock
 
 class TestRender(unittest.TestCase):
 
