@@ -1,7 +1,6 @@
 import neat
 import dino_ai.graph as graph
 import dino_ai.game as game
-import dino_ai.render as render
 
 WINDOW_WIDTH = 1400
 WINDOW_HEIGHT = 400
