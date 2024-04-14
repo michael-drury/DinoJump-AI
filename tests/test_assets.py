@@ -220,8 +220,14 @@ class TestDino(unittest.TestCase):
             self.fail("Update raised assertion")
 
     def test_update_animate_after_exact_frame_num(self):
-        # TODO: Do this
-        return
+
+        start_img = self.dino.get_image()
+        for _ in range(FRAMES_PER_IMAGE_ANIMATE - 1):
+            self.dino.update()
+            self.assertEqual(start_img, self.dino.get_image())
+
+        self.dino.update()
+        self.assertNotEqual(start_img, self.dino.get_image())
 
     #### Get img ####
     def test_get_image_success_no_input(self):
