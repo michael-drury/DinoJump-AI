@@ -153,13 +153,47 @@ class TestGame(unittest.TestCase):
         except:
             self.fail("Increment score raised assertion")
 
+    def test_get_next_obstacle_invalid_id_index_error(self):
+        with self.assertRaises(IndexError):
+            self.game.get_next_obstacle_info(VALID_NUM_DINOS)
+
     def test_get_next_osbstacle_wrong_type_arg(self):
         with self.assertRaises(TypeError):
             self.game.get_next_obstacle_info("")
 
-    # TODO: Check obstacle output params
+    def test_get_next_obstacle_never_below_floor(self):
 
-    # TODO: Check next obstacle changes
+        for _ in range(100):
+
+            game_instance = game.Game(
+                VALID_NUM_DINOS, VALID_WIN_WIDTH, VALID_WIN_HEIGHT
+            )
+            next_object = game_instance.get_next_obstacle_info(0)
+
+            self.assertGreaterEqual(next_object.elevation, 0)
+
+    def test_get_next_obstacle_expected_output(self):
+        try:
+            obst = self.game.get_next_obstacle_info(0)
+            dist = obst.distance
+            elev = obst.elevation
+            height = obst.height
+            cac = obst.is_cactus
+            width = obst.width
+        except:
+            self.fail("Unable to access expected output")
+
+    def test_get_next_obstacle_differnent_obstacles(self):
+        game_instance = game.Game(
+            VALID_NUM_DINOS, VALID_WIN_WIDTH, VALID_WIN_HEIGHT, start_speed=300
+        )
+        is_cactus = game_instance.get_next_obstacle_info(0).is_cactus
+        for _ in range(1000):
+            game_instance.update_environment()
+            if is_cactus is not game_instance.get_next_obstacle_info(0).is_cactus:
+                return
+
+        self.assertTrue(0, "Obstacles all of same type")
 
     #### Update Environment ####
     def test_update_environment_success(self):
