@@ -16,13 +16,12 @@ Obstacle = namedtuple(
 NUM_DIRT_PIECES = 20
 DIRT_SPREAD = 30
 
-DINO_JUMP_VELOCITY = 100
-DINO_SPEED_INCREMENT = 0.03
-
+DINO_JUMP_VELOCITY = 40
+DINO_SPEED_INCREMENT = 0.1
 
 
 class Game:
-    def __init__(self, numDinos, win_width, win_height, frame_rate=60, start_speed=100):
+    def __init__(self, numDinos, win_width, win_height, frame_rate=30, start_speed=15):
 
         if numDinos == 0:
             raise ValueError("Can't init game without dinos")
