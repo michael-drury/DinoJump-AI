@@ -246,7 +246,10 @@ class Bird(_SceneElement):
         self.img = self.img_set[self.img_index]
 
         num_increments = 3
+
+        max_y = max_y - self.img.get_height()
         bird_height_increment = (max_y - min_y) / (num_increments - 1)
+
         self.y = round(
             min_y + (bird_height_increment * random.randint(0, num_increments - 1))
         )

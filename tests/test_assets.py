@@ -345,6 +345,12 @@ class TestBird(unittest.TestCase):
         with self.assertRaises(ValueError):
             assets.Bird(VALID_START_X, 2, 1)
 
+    def test_range_less_than_image_size(self):
+        bird = assets.Bird(VALID_START_X, VALID_MIN_Y, VALID_MAX_Y)
+        height = bird.get_image().get_height()
+        with self.assertRaises(ValueError):
+            assets.Bird(VALID_START_X, VALID_MIN_Y + height - 1, VALID_MIN_Y)
+
     def test_invalid_game_speed(self):
         with self.assertRaises(TypeError):
             assets.Bird(VALID_START_X, VALID_MIN_Y, VALID_MAX_Y, game_speed="1")
