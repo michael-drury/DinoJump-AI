@@ -259,6 +259,8 @@ class Bird(_SceneElement):
             self.img_index = not self.img_index
             self.img = self.img_set[self.img_index]
 
+            self.frames_since_img_update = 0
+
     def update(self):
         self._animate()
         self._update()

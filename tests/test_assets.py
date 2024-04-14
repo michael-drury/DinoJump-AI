@@ -383,7 +383,15 @@ class TestBird(unittest.TestCase):
 
         self.assertNotEqual(start_image, next_frame_image)
 
-
+    def test_animation_loops_on_run(self):
+        bird = assets.Bird(
+            VALID_START_X, VALID_MIN_Y, VALID_MAX_Y, frames_per_img_animate=1
+        )
+        bird.update()
+        start_image = bird.get_image()
+        bird.update()
+        next_frame_image = bird.get_image()
+        self.assertNotEqual(start_image, next_frame_image)
 
     def test_double_game_speed_equals_double_distance_traveled(self):
         game_speed = 10
