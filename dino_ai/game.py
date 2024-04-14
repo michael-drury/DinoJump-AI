@@ -193,6 +193,7 @@ class Game:
                 dino.get_image_pos_x(),
                 dino.get_image_pos_y(),
             ):
+                dino.set_dead()
                 return True
         return False
 
@@ -201,6 +202,8 @@ class Game:
         self.render.display_floor()
         self.render.display_score(self.score)
         for dino in self.dinos:
+            if dino.is_dead():
+                continue
             self.render.draw_img(
                 dino.get_image(), dino.get_image_pos_x(), dino.get_image_pos_y()
             )
