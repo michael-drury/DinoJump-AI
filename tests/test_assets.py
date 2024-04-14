@@ -277,7 +277,7 @@ class TestDino(unittest.TestCase):
         self.assertEqual(start_img, end_img)
 
     def test_get_image_no_animate_while_jump_and_duck(self):
-        dino = assets.Dino(0, 0, fps=1, frames_per_img_animate=1)
+        dino = assets.Dino(0, 0, frames_per_img_animate=1)
 
         dino.jump()
         dino.duck()
