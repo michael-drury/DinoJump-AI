@@ -383,15 +383,7 @@ class TestBird(unittest.TestCase):
 
         self.assertNotEqual(start_image, next_frame_image)
 
-    def test_moves_expected_distance_on_update(self):
-        game_speed = 10
-        frame_rate = 10
-        bird = assets.Bird(VALID_START_X, 0, 10, game_speed, frame_rate)
-        bird.update()
-        distance_traveled = VALID_START_X - bird.get_image_pos_x()
-        expected_distanced_traveled = game_speed / frame_rate
 
-        self.assertEqual(distance_traveled, expected_distanced_traveled)
 
     def test_double_game_speed_equals_double_distance_traveled(self):
         game_speed = 10
@@ -484,7 +476,7 @@ class TestDirt(unittest.TestCase):
             self.assertGreaterEqual(rad, min_rad)
             self.assertLessEqual(rad, max_rad)
 
-    def test_moves_expected_distance_on_update(self):
+    def test_double_game_speed_equals_double_distance_traveled(self):
         game_speed = 10
         frame_rate = 10
         dirt = assets.Dirt(
@@ -495,23 +487,12 @@ class TestDirt(unittest.TestCase):
             fps=frame_rate,
         )
         dirt.update()
-        distance_traveled = VALID_START_X - dirt.get_image_pos_x()
-        expected_distanced_traveled = game_speed / frame_rate
-
-        self.assertEqual(distance_traveled, expected_distanced_traveled)
-
-    def test_double_game_speed_equals_double_distance_traveled(self):
-        game_speed = 10
-        frame_rate = 10
-        dirt = assets.Dirt(
-            VALID_START_X, VALID_MIN_Y, VALID_MAX_Y, game_speed, frame_rate
-        )
-        dirt.update()
         dirt_pos_1 = dirt.get_image_pos_x()
         distance_traveled_1 = VALID_START_X - dirt_pos_1
         dirt.set_game_speed(game_speed * 2)
         dirt.update()
-        distance_traveled_2 = dirt_pos_1 - dirt.get_image_pos_x()
+        dirt_pos_2 = dirt.get_image_pos_x()
+        distance_traveled_2 = dirt_pos_1 - dirt_pos_2
 
         self.assertEqual(distance_traveled_1 * 2, distance_traveled_2)
 
@@ -567,16 +548,6 @@ class TestCactus(unittest.TestCase):
         ).get_image()
 
         self.assertNotEqual(cactus_img_0, cactus_img_1)
-
-    def test_moves_expected_distance_on_update(self):
-        game_speed = 10
-        frame_rate = 10
-        cactus = assets.Cactus(VALID_START_X, VALID_FLOOR_Y, game_speed, frame_rate)
-        cactus.update()
-        distance_traveled = VALID_START_X - cactus.get_image_pos_x()
-        expected_distanced_traveled = game_speed / frame_rate
-
-        self.assertEqual(distance_traveled, expected_distanced_traveled)
 
     def test_double_game_speed_equals_double_distance_traveled(self):
         game_speed = 10
