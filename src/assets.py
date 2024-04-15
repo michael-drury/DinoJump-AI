@@ -30,8 +30,8 @@ class Dino:
         floor_pos_y,
         fps=DEFAULT_FPS,
         frames_per_img_animate=DEFAULT_FRAMES_PER_IMAGE,
-        gravity_normal=-50,
-        gravity_ducking=-70,
+        gravity_normal=-80,
+        gravity_ducking=-100,
         jump_initial_velocity=DEFAULT_JUMP_SPEED_MPS,
     ):
         self.imgs_jump = load_images("dino_jump", 1)
