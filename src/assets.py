@@ -19,37 +19,9 @@ def load_images(name, num):
 
 class Dino:
     """
-    A class representing a dinosaur character in a game, capable of running, jumping, and ducking.
+    Dinosaur character, capable of running, jumping, and ducking.
 
-    Note that the coordinate system used starts from the top left of the window
-
-    Attributes:
-        imgs_jump (list): Images used for the jumping animation.
-        imgs_run (list): Images used for the running animation.
-        imgs_run_duck (list): Images used for the ducking animation.
-        imgs_cur (list): Currently active images based on the dino's state.
-        img_index (int): Current index of the image to display from imgs_cur.
-        frames_since_last_img_update (int): Counter for the frames elapsed since the last image change.
-        fps (int): Frames per second, dictating the game's update rate.
-        animation_rate (int): Number of frames to wait before switching to the next animation image.
-        floor_pos_y (int): The y-coordinate of the floor position.
-        x (int): The current x-coordinate of the dino.
-        y (int): The current y-coordinate of the dino.
-        duck_triggered (bool): Flag indicating whether the duck action has been triggered.
-        jump_triggered (bool): Flag indicating whether the jump action has been triggered.
-        frames_since_jump_start (int): Counter for the frames elapsed since the jump was initiated.
-        gravity_normal (int): The gravity effect applied when not ducking [m/s^2].
-        gravity_ducking (int): The gravity effect applied when ducking [m/s^2].
-        jump_velocity (int): The initial velocity of the jump [m/s]
-
-    Args:
-        start_pos_x (int): The starting x-coordinate of the dino.
-        floor_pos_y (int): The y-coordinate of the floor position.
-        fps (int, optional): Frames per second for the game's update rate. Defaults to 60.
-        frames_per_img_animate (int, optional): Number of frames to wait before switching to the next animation image. Defaults to DEFAULT_FRAMES_PER_IMAGE.
-        gravity_normal (int, optional): The gravity effect applied when not ducking. Defaults to -10.
-        gravity_ducking (int, optional): The gravity effect applied when ducking. Defaults to -15.
-        jump_initial_velocity (int, optional): The initial velocity of the jump. Defaults to 15.
+    Note that the origin of the coordinate system used starts from the top left of the window.
     """
 
     def __init__(
@@ -160,14 +132,15 @@ class Dino:
         return self.dead
 
 
-# TODO: Game speed param used here but frame rate used elsewhere
-# TODO: Should population of these game elements be handled in this class or the game class?
-# TODO: Maybe it doesn't make sense for all of these classes to hold fps if the reponsibility for this is at the game level?
-
-
-# TODO: Make clear what coordinate system is being used in this instance
-# ALWAYS USE TOP LEFT COORDINATE SYSTEM FOR SIMPLICITY
 class _SceneElement:
+    """
+    Abstract base class for common functionalities of elements that appear within the game scene.
+    
+    Provides basic attributes and methods needed for managing these elements, such as their position and movement across the game window.
+    
+    Note that the origin of the coordinate system used starts from the top left of the window.
+    """
+
     def __init__(self, fps, start_x, game_speed):
         if not isinstance(fps, int):
             raise TypeError("Expected fps to be an int")
@@ -202,6 +175,14 @@ class _SceneElement:
 
 
 class Cactus(_SceneElement):
+    """
+    A subclass of _SceneElement that represents cactus obstacles in the game.
+
+    Cactuses move horizontally across the screen and vary in size.
+
+    Note that the origin of the coordinate system used starts from the top left of the window.
+    """
+
     def __init__(
         self,
         start_x,
@@ -222,8 +203,15 @@ class Cactus(_SceneElement):
         self._update()
 
 
-# NOTE: Y coordinate is at the top left
 class Bird(_SceneElement):
+    """
+    A subclass of _SceneElement representing flying birds as obstacles.
+
+    Birds can appear at different heights and animate between two images to simulate flying.
+    
+    Note that the origin of the coordinate system used starts from the top left of the window.
+    """
+
     def __init__(
         self,
         start_x,
@@ -270,6 +258,12 @@ class Bird(_SceneElement):
 
 
 class Dirt(_SceneElement):
+    """
+    A subclass of _SceneElement that represents random dirt particles on the game screen.
+    
+    Note that the origin of the coordinate system used starts from the top left of the window.
+    """
+
     def __init__(
         self,
         start_x,

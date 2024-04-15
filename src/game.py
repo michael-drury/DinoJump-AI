@@ -21,6 +21,11 @@ DINO_SPEED_INCREMENT = 0.1
 
 
 class Game:
+    """
+    A class for managing gameplay in Dino Jump. It integrates all game components, including dinosaurs, obstacles, and environmental elements.
+    
+    Handles game initialisation, game state management, updates game elements, and renders the game scene.
+    """
     def __init__(self, numDinos, win_width, win_height, frame_rate=30, start_speed=15):
 
         if numDinos == 0:

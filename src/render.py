@@ -7,6 +7,11 @@ FLOOR_OFFSET = 20
 
 
 class Render:
+    """
+    A class for rendering the game window, assets, and scoore data.
+
+    """
+
     def __init__(self, game_title, window_width, window_height, floor_height):
 
         if not game_title and type(game_title) is str:
