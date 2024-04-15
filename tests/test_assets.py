@@ -1,6 +1,6 @@
 import unittest
 import math
-import dino_ai.assets as assets
+import src.assets as assets
 
 POS_X_START = 0
 POS_Y_START = 0
@@ -586,3 +586,7 @@ class TestCactus(unittest.TestCase):
         self.assertEqual(
             VALID_FLOOR_Y - cactus.get_image().get_height(), cactus.get_image_pos_y()
         )
+
+
+if __name__ == "__main__":
+    unittest.main()

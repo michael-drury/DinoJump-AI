@@ -1,5 +1,5 @@
 import unittest
-import dino_ai.render as render
+import src.render as render
 import pygame
 import os
 import tests.test_common as test_common

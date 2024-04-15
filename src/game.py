@@ -1,6 +1,6 @@
-import dino_ai.assets as assets
-import dino_ai.render as render
-import dino_ai.mechanics as mechanics
+import src.assets as assets
+import src.render as render
+import src.mechanics as mechanics
 
 import random
 import pygame

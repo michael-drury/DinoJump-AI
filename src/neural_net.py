@@ -1,6 +1,6 @@
 import neat
-import dino_ai.graph as graph
-import dino_ai.game as game
+import src.graph as graph
+import src.game as game
 
 WINDOW_WIDTH = 1400
 WINDOW_HEIGHT = 400

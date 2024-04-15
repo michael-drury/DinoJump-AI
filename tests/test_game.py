@@ -1,6 +1,6 @@
 import unittest
 import time
-import dino_ai.game as game
+import src.game as game
 import tests.test_common as test_common
 
 VALID_NUM_DINOS = 3
